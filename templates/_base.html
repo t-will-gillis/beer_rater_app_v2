@@ -52,14 +52,14 @@
                     {{ user.username }}
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">Log Out</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="dropdown-item" >Log Out</a></li>
                 </ul>
             </div>
             {% else %}
             </ul>
             <div class="text-end">
-                <a href="#" class="btn btn-outline-primary me-2">Log In</a>
-                <a href="#" class="btn btn-primary">Sign Up</a>
+                <a href="{% url 'account_login' %}" class="btn btn-outline-primary me-2">Log In</a>
+                <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
             </div>
             {% endif %}
         </div>
