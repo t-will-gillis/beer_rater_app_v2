@@ -6,6 +6,7 @@ from .views import HomePageView, AboutPageView
 
 class HomePageTests(SimpleTestCase):
     def setUp(self):
+        databases = '__all__'
         url = reverse("home")
         self.response = self.client.get(url)
 
