@@ -1,10 +1,10 @@
-from django.test import SimpleTestCase
+from django.test import TestCase
 from django.urls import reverse, resolve
 
 from .views import HomePageView, AboutPageView
 
 
-class HomePageTests(SimpleTestCase):
+class HomePageTests(TestCase):
     def setUp(self):
         databases = '__all__'
         url = reverse("home")
@@ -19,10 +19,13 @@ class HomePageTests(SimpleTestCase):
 
     def test_homepage_url_resolves_homepageview(self):
         view = resolve("/")
-        self.assertEqual(view.func.__name__, HomePageView.as_view().__name__)
+        self.assertEqual(
+            view.func.__name__, 
+            HomePageView.as_view().__name__
+        )
 
 
-class AboutPageTests(SimpleTestCase):
+class AboutPageTests(TestCase):
     def setUp(self):
         url = reverse("about")
         self.response = self.client.get(url)
