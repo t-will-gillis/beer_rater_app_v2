@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ brewery.name }}{% endblock title %}
+
+{% block content %}
+    <div class="brewery-detail">
+        <h2><a href="">{{ brewery.name }}</a></h2>
+        <p>City: {{ brewery.city }}</p>
+        <p>State: {{ brewery.state }}</p>
+        <p>Country: {{ brewery.country }}</p>
+        <p>Website: {{ brewery.url }}</p>
+        <p>Number of Beers: ###</p>
+        <p>Average Beer Score: ###</p>
+    </div>
+{% endblock content %}

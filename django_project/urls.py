@@ -9,4 +9,5 @@ urlpatterns = [
     # Local apps
     path("", include("pages.urls")),
     path("beers/", include("beers.urls")),
+    path("breweries/", include("breweries.urls")),
 ]

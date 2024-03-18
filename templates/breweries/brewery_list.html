@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+
+{% block title %}Breweries{% endblock title %}
+    {% block content %}
+        {% for brewery in brewery_list %}
+            <div>
+                <h2><a href="{{ brewery.get_absolute_url }}">{{ brewery.name }}</a></h2>
+            </div>
+        {% endfor %}
+    {% endblock content %}
