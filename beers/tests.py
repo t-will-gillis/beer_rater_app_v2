@@ -1,17 +1,31 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
 from .models import Beer
+from reviews.models import Review
 
 
 class BeerTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="reviewuser",
+            email="reviewuser@email.com",
+            password="testpass123",
+        )
+
         cls.beer = Beer.objects.create(
-        name="Fatter Tire",
-        style="1b",
-        abv="4.5",
+            name="Fatter Tire",
+            style="1b",
+            abv="4.5",
+        )
+
+        cls.review = Review.objects.create(
+            beer=cls.beer,
+            author=cls.user,
+            review="Superb!",
         )
 
     def test_beer_listing(self):
@@ -31,5 +45,6 @@ class BeerTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, "Fatter Tire")
+        self.assertContains(response, "Superb!")
         self.assertTemplateUsed(response, "beers/beer_detail.html")
 

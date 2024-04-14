@@ -9,5 +9,13 @@
         <p>ABV: {{ beer.abv }}</p>
         <p>Average Score: {{ beer.avg_score }}</p>
         <p>Number of Reviews: {{ beer.num_reviews }}</p>
+        <div>
+            <h3>Reviews</h3>
+            <ul>
+                {% for review in beer.reviews.all %}
+                <li>{{ review.overall }}  {{ review.review }}  {{ review.author }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock content %}

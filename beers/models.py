@@ -21,11 +21,13 @@ class Beer(models.Model):
     avg_score = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     num_reviews = models.IntegerField(default=0)
     beer_notes = models.TextField(blank=True)
-    # brewery = models.ForeignKey(
-    #     Brewery,
-    #     on_delete=models.CASCADE,
-    #     related_name="beers",
-    # )
+    brewery = models.ForeignKey(
+        "breweries.Brewery",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="beers",
+    )
 
     def __str__(self):
         return f"{self.name}"

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "pages",
     "beers",
     "breweries",
+    "reviews",
 ]
 
 MIDDLEWARE = [
