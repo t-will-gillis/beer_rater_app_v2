@@ -4,6 +4,9 @@
 
 {% block content %}
     <div class="beer-detail">
+        {% if beer.label %}
+            <img class="label" height=250 src="{{ beer.label.url }}" alt="{{ beer.name }}">
+        {% endif %}
         <h2><a href="">{{ beer.name }}</a></h2>
         <p>Style: {{ beer.style }}</p>
         <p>ABV: {{ beer.abv }}</p>

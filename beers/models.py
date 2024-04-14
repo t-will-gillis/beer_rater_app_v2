@@ -28,6 +28,7 @@ class Beer(models.Model):
         on_delete=models.CASCADE,
         related_name="beers",
     )
+    label = models.ImageField(upload_to="labels/", blank=True)
 
     def __str__(self):
         return f"{self.name}"
