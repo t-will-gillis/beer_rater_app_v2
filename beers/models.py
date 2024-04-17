@@ -30,6 +30,10 @@ class Beer(models.Model):
     )
     label = models.ImageField(upload_to="labels/", blank=True)
 
+    class Meta:
+        permissions = [
+            ("special_status", "Can read all beers"),
+        ]
     def __str__(self):
         return f"{self.name}"
     
