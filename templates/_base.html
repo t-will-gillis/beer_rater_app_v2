@@ -27,10 +27,14 @@
             <li><a href="#" class="nav-link px-2 text-white">Reviews</a></li>
             <li><a href="{% url 'about' %}" class="nav-link px-2 text-white">About</a></li>
           </ul>
-  
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          <form class="d-flex" action="{% url 'search_results' %}" method="get">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-\
+            label="Search" >
+            <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+          <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          </form> -->
   
           <div class="text-end">
             <button type="button" class="btn btn-outline-light me-2">--Login</button>

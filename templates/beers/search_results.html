@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block title %}Search{% endblock title %}
+{% block content %}
+    <h1>Search Results</h1>
+    {% for beer in beer_list %}
+        <div>
+            <h3><a href="{{ beer.get_absolute_url }}">{{ beer.name }}</a></h3>
+            <p>Style: {{ beer.style }}</p>
+            <p>ABV: {{ beer.abv }}%</p>
+            <p>Rating: {{ beer.avg_score }} </p>
+        </div>
+    {% endfor %}
+{% endblock content %}
