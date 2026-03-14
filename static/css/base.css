@@ -1,6 +1,9 @@
 body {
     min-height: 75rem;
     padding-top: 4.5rem;
+    background-image: url("../images/pexels-wyxina-tresse-1.jpg");
+    background-color: darkgrey;
+    /* background: rgb(70, 70, 70) url("..\ images\pexels-wyxina-tresse-1.jpg") no-repeat fixed center; */
 }
 
 h1 {
