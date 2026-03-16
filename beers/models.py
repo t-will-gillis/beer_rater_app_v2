@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 import json
 import uuid
+from PIL import Image
 
 def get_styles():
     with open("./staticfiles/beaut_soup/styles.json") as file:
@@ -29,6 +31,14 @@ class Beer(models.Model):
         related_name="beers",
     )
     label = models.ImageField(upload_to="labels/", blank=True)
+    is_approved = models.BooleanField(default=False)
+    submitted_by = models.ForeignKey(
+        get_user_model(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="submitted_beers",
+    )
 
     class Meta:
         permissions = [
@@ -39,5 +49,12 @@ class Beer(models.Model):
     
     def get_absolute_url(self):
         return reverse("beer_detail", args=[str(self.id)])
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.label:
+            img = Image.open(self.label.path)
+            img.thumbnail((400, 300))
+            img.save(self.label.path)
     
 
