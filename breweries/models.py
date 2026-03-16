@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 import uuid
@@ -14,6 +15,14 @@ class Brewery(models.Model):
     url = models.URLField(blank=True)
     num_beers = models.IntegerField(default=0)
     avg_score = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+    is_approved = models.BooleanField(default=False)
+    submitted_by = models.ForeignKey(
+        get_user_model(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="submitted_breweries",
+    )
 
     def __str__(self):
         return f"{self.name}"
