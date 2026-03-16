@@ -23,14 +23,14 @@ Full-stack web app for reviewing beers and breweries.
     <br>
     <details><summary>Home Page example</summary> 
 
-    <img src="staticfiles\images\homepage_screen.png">
+    <img src="static\images\homepage_screen.png">
 
     </details>  
     <br>
 
     <details><summary>Beer Page example</summary> 
 
-    <img src="staticfiles\images\item_screen.png">
+    <img src="static\images\item_screen.png">
 
     </details>  
 
