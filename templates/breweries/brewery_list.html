@@ -1,10 +1,43 @@
 {% extends "_base.html" %}
 
-{% block title %}Breweries{% endblock title %}
-    {% block content %}
-        {% for brewery in brewery_list %}
-            <div>
-                <h2><a href="{{ brewery.get_absolute_url }}">{{ brewery.name }}</a></h2>
+{% block title %}Breweries{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Breweries</h1>
+    {% if user.is_authenticated %}
+    <a href="{% url 'brewery_create' %}" class="btn btn-warning">Add a Brewery</a>
+    {% endif %}
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for brewery in brewery_list %}
+    <div class="col">
+        <a href="{{ brewery.get_absolute_url }}" class="text-decoration-none">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">{{ brewery.name }}</h5>
+                    <p class="text-secondary small mb-3">
+                        <i class="bi bi-geo-alt me-1"></i>
+                        {{ brewery.city }}{% if brewery.city and brewery.state %}, {% endif %}{{ brewery.state }}
+                        {% if brewery.country %}<span class="ms-1">({{ brewery.country }})</span>{% endif %}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-light small">
+                            {{ brewery.num_beers }} beer{{ brewery.num_beers|pluralize }}
+                        </span>
+                        <span class="text-warning small">
+                            <i class="bi bi-star-fill me-1"></i>{{ brewery.avg_score }}
+                        </span>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-    {% endblock content %}
+        </a>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p class="text-secondary">No breweries listed yet.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

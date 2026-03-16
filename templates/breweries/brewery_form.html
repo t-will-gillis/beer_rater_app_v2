@@ -1,0 +1,32 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if object %}Edit {{ object.name }}{% else %}Add a Brewery{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="text-warning mb-4">{% if object %}Edit {{ object.name }}{% else %}Add a Brewery{% endif %}</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-flex gap-2 mt-3">
+                        <button class="btn btn-warning" type="submit">
+                            {% if object %}Save Changes{% else %}Submit Brewery{% endif %}
+                        </button>
+                        <a href="{% if object %}{{ object.get_absolute_url }}{% else %}{% url 'brewery_list' %}{% endif %}"
+                           class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+                {% if not object %}
+                <p class="text-secondary small mt-3 mb-0">Your submission will be reviewed before it appears publicly.</p>
+                {% else %}
+                <p class="text-secondary small mt-3 mb-0">Saving changes will require re-approval before they appear publicly.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,15 +1,92 @@
 {% extends "_base.html" %}
 
-{% block title %}{{ brewery.name }}{% endblock title %}
+{% block title %}{{ brewery.name }}{% endblock %}
 
 {% block content %}
-    <div class="brewery-detail">
-        <h2><a href="">{{ brewery.name }}</a></h2>
-        <p>City: {{ brewery.city }}</p>
-        <p>State: {{ brewery.state }}</p>
-        <p>Country: {{ brewery.country }}</p>
-        <p>Website: {{ brewery.url }}</p>
-        <p>Number of Beers: ###</p>
-        <p>Average Beer Score: ###</p>
+<div class="row g-4">
+
+    <!-- Left: brewery info -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-warning">{{ brewery.name }}</h2>
+                <hr class="border-secondary">
+
+                <p class="text-light mb-1">
+                    <i class="bi bi-geo-alt me-2 text-warning"></i>
+                    {{ brewery.city }}{% if brewery.city and brewery.state %}, {% endif %}{{ brewery.state }}
+                </p>
+                {% if brewery.country %}
+                <p class="text-secondary small ms-4 mb-2">{{ brewery.country }}</p>
+                {% endif %}
+
+                {% if brewery.url %}
+                <p class="mt-2 mb-0">
+                    <i class="bi bi-globe me-2 text-warning"></i>
+                    <a href="{{ brewery.url }}" class="text-warning text-decoration-none" target="_blank" rel="noopener">
+                        Website <i class="bi bi-box-arrow-up-right ms-1 small"></i>
+                    </a>
+                </p>
+                {% endif %}
+
+                <hr class="border-secondary">
+
+                <div class="row text-center g-2">
+                    <div class="col-6">
+                        <div class="fw-bold text-warning fs-3">{{ brewery.num_beers }}</div>
+                        <small class="text-secondary">Beers</small>
+                    </div>
+                    <div class="col-6">
+                        <div class="fw-bold text-warning fs-3">{{ brewery.avg_score }}</div>
+                        <small class="text-secondary">Avg Score</small>
+                    </div>
+                </div>
+
+                {% if user == brewery.submitted_by %}
+                <div class="d-flex justify-content-center gap-2 mt-3">
+                    <a href="{% url 'brewery_update' brewery.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a href="{% url 'brewery_delete' brewery.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+                {% endif %}
+
+                {% if not brewery.is_approved %}
+                <p class="text-secondary small text-center mt-2 mb-0">Pending approval</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
-{% endblock content %}
+
+    <!-- Right: beers from this brewery -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="text-warning mb-4">Beers</h4>
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    {% for beer in approved_beers %}
+                    <div class="col">
+                        <a href="{{ beer.get_absolute_url }}" class="text-decoration-none">
+                            <div class="card h-100">
+                                <div class="card-body py-2">
+                                    <h6 class="card-title text-warning mb-1">{{ beer.name }}</h6>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-secondary small">{{ beer.style }}</span>
+                                        <span class="text-warning small">
+                                            <i class="bi bi-star-fill me-1"></i>{{ beer.avg_score }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-secondary">No beers listed yet.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

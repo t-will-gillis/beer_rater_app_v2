@@ -1,16 +1,33 @@
 {% extends "_base.html" %}
 {% load socialaccount %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}BeerRater — Discover Great Craft Beer{% endblock %}
 
 {% block content %}
+<div class="text-center py-5">
+    <h1 class="display-3 fw-bold mt-3 mb-2">BeerRater</h1>
+    <p class="lead text-light mb-5">Discover, rate, and explore craft beers from breweries around the world.</p>
+
     {% if user.is_authenticated %}
-        <p>Hi {{ user.username }}!</p>
-        <p><a href="{% url 'account_logout' %}">Log Out</a></p>
+        <p class="text-secondary mb-4">Welcome back, <strong class="text-warning">{{ user.email }}</strong></p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'beer_list' %}" class="btn btn-warning btn-lg">
+                Browse Beers
+            </a>
+            <a href="{% url 'brewery_list' %}" class="btn btn-outline-warning btn-lg">
+                Browse Breweries
+            </a>
+        </div>
     {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'account_login' %}">Log In</a> |
-        <a href="{% url 'account_signup' %}">Sign Up</a> |
-        <a href="{% provider_login_url 'github' %}">Sign Up with GitHub</a>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'account_signup' %}" class="btn btn-warning btn-lg">
+                Get Started
+            </a>
+            <a href="{% url 'account_login' %}" class="btn btn-outline-light btn-lg">Log In</a>
+        </div>
+        <p class="text-secondary mt-3 small">
+            Or <a href="{% provider_login_url 'github' %}" class="text-warning">sign in with GitHub</a>
+        </p>
     {% endif %}
-{% endblock content %}
+</div>
+{% endblock %}

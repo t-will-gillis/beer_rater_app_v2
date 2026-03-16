@@ -1,11 +1,108 @@
+/* ── Background ── */
 body {
-    min-height: 75rem;
-    padding-top: 4.5rem;
-    background-image: url("../images/pexels-wyxina-tresse-1.jpg");
-    background-color: darkgrey;
-    /* background: rgb(70, 70, 70) url("..\ images\pexels-wyxina-tresse-1.jpg") no-repeat fixed center; */
+    min-height: 100vh;
+    background-image: url("../images/brew_back.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-h1 {
-    color: cornflowerblue;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 8, 2, 0.63);
+    z-index: -1;
+}
+
+/* ── Typography ── */
+h1, h2, h3 {
+    color: #f0c040;
+}
+
+/* ── Navbar ── */
+.search-input {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.search-input:focus {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: #f0c040;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(240, 192, 64, 0.25);
+}
+
+/* ── Cards ── */
+.card {
+    background: rgba(25, 16, 6, 0.78);
+    border: 1px solid rgba(212, 160, 23, 0.25);
+    backdrop-filter: blur(6px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+a .card:hover {
+    border-color: #f0c040;
+    transform: translateY(-3px);
+}
+
+/* ── Auth forms ── */
+.auth-card {
+    max-width: 420px;
+    margin: 3rem auto;
+}
+
+/* ── Beer/Brewery card images ── */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.card-img-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 4rem;
+    color: rgba(240, 192, 64, 0.4);
+}
+
+/* ── Horizontal card images ── */
+.card-img-side {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.card-img-side-placeholder {
+    height: 160px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+/* ── Star/score color ── */
+.text-amber {
+    color: #f0c040;
+}
+
+/* ── Review items ── */
+.review-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }

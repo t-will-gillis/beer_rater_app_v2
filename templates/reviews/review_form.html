@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if object %}Edit Review{% else %}Add a Review{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body p-4">
+                {% if object %}
+                    <h2 class="text-warning mb-1">Edit Review</h2>
+                    <p class="text-secondary mb-4">{{ object.beer.name }}</p>
+                {% else %}
+                    <h2 class="text-warning mb-1">Add a Review</h2>
+                    <p class="text-secondary mb-4">{{ beer.name }}</p>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-flex gap-2 mt-3">
+                        <button class="btn btn-warning" type="submit">
+                            {% if object %}Save Changes{% else %}Submit Review{% endif %}
+                        </button>
+                        <a href="{% if object %}{% url 'beer_detail' object.beer.pk %}{% else %}{% url 'beer_detail' beer.pk %}{% endif %}"
+                           class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+                {% if not object %}
+                <p class="text-secondary small mt-3 mb-0">Your review will be visible after approval.</p>
+                {% else %}
+                <p class="text-secondary small mt-3 mb-0">Saving changes will require re-approval before they appear publicly.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
