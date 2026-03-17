@@ -12,6 +12,11 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    {% if not object %}
+                    <p class="small mb-3">Brewery not listed?
+                        <a href="{% url 'brewery_create' %}?next={% url 'beer_create' %}">Add a new brewery</a>
+                    </p>
+                    {% endif %}
                     <div class="d-flex gap-2 mt-3">
                         <button class="btn btn-warning" type="submit">
                             {% if object %}Save Changes{% else %}Submit Beer{% endif %}

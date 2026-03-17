@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -49,6 +50,12 @@ class BreweryCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.submitted_by = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        next_url = self.request.GET.get("next")
+        if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={self.request.get_host()}):
+            return next_url
+        return super().get_success_url()
 
 
 class BreweryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
