@@ -11,9 +11,9 @@ from .models import Beer
 
 
 def _approved_beers(user):
-    qs = Beer.objects.filter(is_approved=True)
+    qs = Beer.objects.select_related("brewery").filter(is_approved=True)
     if user.is_authenticated:
-        qs = (qs | Beer.objects.filter(submitted_by=user)).distinct()
+        qs = (qs | Beer.objects.select_related("brewery").filter(submitted_by=user)).distinct()
     return qs
 
 
@@ -44,9 +44,9 @@ class BeerDetailView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        reviews = self.object.reviews.filter(is_approved=True)
+        reviews = self.object.reviews.select_related("author").filter(is_approved=True)
         if self.request.user.is_authenticated:
-            reviews = (reviews | self.object.reviews.filter(author=self.request.user)).distinct()
+            reviews = (reviews | self.object.reviews.select_related("author").filter(author=self.request.user)).distinct()
         context["reviews"] = reviews
         return context
 
