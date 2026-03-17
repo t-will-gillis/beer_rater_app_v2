@@ -16,7 +16,7 @@
         <a href="{{ beer.get_absolute_url }}" class="text-decoration-none">
             <div class="card h-100">
                 <div class="row g-0">
-                    <div class="col-4">
+                    <div class="col-4" style="overflow: hidden;">
                         {% if beer.label %}
                             <img src="{{ beer.label.url }}" class="card-img-side" alt="{{ beer.name }}">
                         {% else %}
@@ -28,6 +28,9 @@
                             <h5 class="card-title text-warning mb-1">{{ beer.name }}</h5>
                             {% if beer.brewery %}
                             <p class="text-secondary small mb-2">{{ beer.brewery.name }}</p>
+                            {% endif %}
+                            {% if beer.style %}
+                            <p class="text-secondary small mb-2">{{ beer.get_style_display }}</p>
                             {% endif %}
                             <div class="mb-2">
                                 <span class="badge bg-secondary me-1">{{ beer.style }}</span>

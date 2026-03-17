@@ -22,8 +22,7 @@
                     <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="{% url 'beer_list' %}" class="nav-link">Beers</a></li>
                     <li class="nav-item"><a href="{% url 'brewery_list' %}" class="nav-link">Breweries</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Reviews</a></li>
-                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
                 </ul>
                 <form class="d-flex me-3" action="{% url 'search_results' %}" method="get">
                     <input class="form-control form-control-sm me-2 search-input" type="search" name="q" placeholder="Search beers..." aria-label="Search">
